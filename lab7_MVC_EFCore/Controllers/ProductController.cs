@@ -31,6 +31,9 @@ namespace lab7_MVC_EFCore.Controllers
         [HttpPost]
         public IActionResult Create(Product model, IFormFile ProductImage)
         {
+            ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(), "Id", "Name");
+            ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name");
+            
             if (ProductImage != null)
             {
                 //upload và cập nhật field Logo
@@ -39,6 +42,7 @@ namespace lab7_MVC_EFCore.Controllers
             _context.Add(model);
             _context.SaveChanges();
             return RedirectToAction("Index");
+            
         }
 
 
